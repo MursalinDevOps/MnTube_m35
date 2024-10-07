@@ -1,52 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MnTube</title>
     <!-- DaisyUI CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts CDN -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
     <!-- FontAwesome CDN -->
-    <script src="https://kit.fontawesome.com/5004909c04.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/5004909c04.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- FAVICON -->
-    <link rel="shortcut icon" href="#" type="image/x-icon">
-</head>
-<body>
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+  </head>
+  <body>
     <header>
-        <nav class="w-11/12 mx-auto flex justify-between items-center py-4 border-b">
-            <div class="logo w-[150px]">
-                <img src="./assets/Logo.png" alt="">
-            </div>
-            <div class="search w-[350px]">
-                <label class="input input-bordered flex items-center gap-2">
-                    <input type="text" class="grow" placeholder="Search" />
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 16 16"
-                      fill="currentColor"
-                      class="h-4 w-4 opacity-70">
-                      <path
-                        fill-rule="evenodd"
-                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                        clip-rule="evenodd" />
-                    </svg>
-                  </label>
-            </div>
+      <nav>
+        <div
+          class="navbar w-11/12 mx-auto flex justify-between items-center py-4 border-b"
+        >
+          <!-- logo -->
+          <div class="w-[100px] lg:w-[150px]">
+            <img src="./assets/Logo.png" alt="" />
+          </div>
+          <!-- search bar -->
+          <div>
+            <input
+              type="text"
+              placeholder="Search"
+              class="input input-bordered w-24 lg:w-[400px] md:w-auto"
+            />
+          </div>
+          <div>
+            <!-- sort button -->
             <div class="sort">
-                <button class="btn w-[150px] bg-[#FF1F3D] text-white">Sort</button>
+              <button
+                class="btn w-[100px] lg:w-[150px] bg-[#FF1F3D] text-white"
+              >
+                Sort
+              </button>
             </div>
-        </nav>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <!-- JS SCRIPT -->
     <script src="./scripts/video.js"></script>
-</body>
+  </body>
 </html>
