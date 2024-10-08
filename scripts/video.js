@@ -1,3 +1,11 @@
+function getTimeString(time) {
+  const hour = parseInt(time / 3600);
+  let remainingSecond = parseInt(time % 3600);
+  const minute = parseInt(remainingSecond/60);
+  remainingSecond = remainingSecond % 60;
+  return `${hour}hr ${minute}min ${remainingSecond}secs ago`
+}
+
 // LOAD CATEGORIES
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
@@ -39,11 +47,12 @@ const displayVideos = (videos) => {
     const divEl = document.createElement("div");
     divEl.classList.add("card", "card-compact");
     divEl.innerHTML = `
-    <figure class="h-[200px] relative">
+    <figure class="h-[200px] relative rounded-lg">
     <img
       class="h-full w-full object-cover"
       src="${video.thumbnail}"/>
-      <span class="absolute right-2 bottom-2 bg-black rounded-lg text-white p-2">${video.others.posted_date}</span>
+      ${video.others.posted_date?.length == 0 ? "" : `<span class="absolute right-2 bottom-2 bg-black rounded-lg text-white p-2">${getTimeString(video.others.posted_date)}</span>`}
+      
   </figure>
   <div class="px-0 py-6 flex gap-3">
   <div>
