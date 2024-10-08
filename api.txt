@@ -6,4 +6,4 @@ https://openapi.programming-hero.com/api/phero-tube/category/categoryId
 
 https://openapi.programming-hero.com/api/phero-tube/videos?title=videoTitle
 
-https://openapi.programming-hero.com/api/phero-tube/video/video_id
+https://openapi.programming-hero.com/api/phero-tube/video/

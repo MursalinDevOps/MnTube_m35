@@ -6,6 +6,13 @@ function getTimeString(time) {
   return `${hour}hr ${minute}min ${remainingSecond}secs ago`;
 }
 
+function removeActiveClass() {
+  const buttons = document.getElementsByClassName("category-btn");
+  for (let btn of buttons) {
+    btn.classList.remove("active");
+  }
+}
+
 // LOAD CATEGORIES
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/phero-tube/categories")
@@ -25,16 +32,44 @@ const loadCategoryVideos = (id) => {
   // alert(id)
   fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
     .then((res) => res.json())
-    .then((data) => displayVideos(data.category))
+    .then((data) => {
+      // remove active class from all buttons
+      removeActiveClass();
+      // add active class from all buttons
+      const activeBtn = document.getElementById(`btn-${id}`);
+      activeBtn.classList.add("active");
+
+      displayVideos(data.category);
+    })
     .catch((err) => console.log(err));
 };
+// LOAD DETAILS
+const loadDetails = async(videoId) => {
+  const url = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayDetails(data.video);
+};
+
+// DISPLAY DETAILS
+const displayDetails = (video) => {
+  // console.log(video);
+  const modalContainer = document.getElementById('modal-content');
+  modalContainer.innerHTML = `
+   <img src="${video.thumbnail}" alt="">
+            <h3 class="text-2xl font-bold">${video.title}</h3>
+            <p>${video.description}</p>
+  `
+  // way 1
+  document.getElementById('showModalData').click();
+}
 
 // DISPLAY VIDEOS
 const displayVideos = (videos) => {
   const videoContainer = document.getElementById("videos-container");
   videoContainer.innerHTML = "";
-  if(videos.length == 0){
-    videoContainer.classList.remove('grid');
+  if (videos.length == 0) {
+    videoContainer.classList.remove("grid");
     videoContainer.innerHTML = `
      <div class="w-11/12 md:8/12 lg:w-6/12 mx-auto flex flex-col items-center lg:h-[500px] justify-center gap-5">
           <img src="./assets/Icon.png" alt="">
@@ -42,9 +77,8 @@ const displayVideos = (videos) => {
          </div>
     `;
     return;
-  }
-  else{
-    videoContainer.classList.add('grid');
+  } else {
+    videoContainer.classList.add("grid");
   }
   videos.forEach((video) => {
     const divEl = document.createElement("div");
@@ -77,7 +111,9 @@ const displayVideos = (videos) => {
         ? '<img class="w-5 h-5" src="https://img.icons8.com/?size=48&id=D9RtvkuOe31p&format=png"></img>'
         : ""
     }
-
+<button onclick="loadDetails('${
+      video.video_id
+    }')" class="btn btn-sm">Details</button>
     </div>
     <p class="text-gray-500">${video.others.views} Views</p>
     </div>
@@ -97,7 +133,7 @@ const displayCategories = (categories) => {
     const buttonContainer = document.createElement("div");
     // add inner Contents
     buttonContainer.innerHTML = `
-    <button onclick="loadCategoryVideos(${item.category_id})" class="btn w-[100px]">${item.category} </button>`;
+    <button id="btn-${item.category_id}" onclick="loadCategoryVideos(${item.category_id})" class="btn category-btn w-[100px]">${item.category} </button>`;
     // add the dynamic button element to the container to show on the UI
     categoryContainer.appendChild(buttonContainer);
   });
